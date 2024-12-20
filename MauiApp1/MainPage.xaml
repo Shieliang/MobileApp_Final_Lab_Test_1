@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="MauiApp1.MainPage">
+
+    <StackLayout>
+
+        <Grid VerticalOptions="CenterAndExpand"
+             RowDefinitions="*" ColumnDefinitions="auto,*"
+             Margin="20">
+            <Label x:Name="label1" Grid.Row="0"
+                Grid.Column="0"
+                HorizontalOptions="CenterAndExpand"
+                Text="{Binding Source={x:Reference slider1}, Path=Value, StringFormat='{0:F0}'}"/>
+            <Slider x:Name="slider1" Grid.Row="0"
+                Grid.Column="1"
+                HorizontalOptions="FillAndExpand"
+                MinimumTrackColor="Blue"
+                MaximumTrackColor="Red"
+                Minimum="0"
+                Maximum="100"/>
+            <Label x:Name="label2" Grid.Row="1"
+                   Grid.ColumnSpan="2"
+                   HorizontalOptions="CenterAndExpand">
+                <Label.Triggers>
+                    <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference slider1}, Path=Value}" Value="0">
+                        <Setter Property="Text" Value="Failed"/>
+                    </DataTrigger>
+                    <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference slider1}, Path=Value}" Value="40">
+                        <Setter Property="Text" Value="Passed"/>
+                    </DataTrigger>
+                    <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference slider1}, Path=Value}" Value="80">
+                        <Setter Property="Text" Value="Excellent"/>
+                    </DataTrigger>
+                </Label.Triggers>
+            </Label>
+        </Grid>
+    </StackLayout>
+
+</ContentPage>
